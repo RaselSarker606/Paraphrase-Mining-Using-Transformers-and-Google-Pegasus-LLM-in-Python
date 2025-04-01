@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraphrase Generator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+    .list-group-item {
+        background-color: white;
+        color: black;
+    }
+</style>
+
+<body>
+    <h1 class="text-center">Paraphrase Generator App</h1>
+    <div class="container mt-5" style="padding: 50px; width: 50%; border: 6px red dashed; border-radius: 15px;">
+        <h5 class="text-center mb-4">Using Google PEGASUS Transformer</h5>
+        <form action="/paraphrase" method="POST">
+            <div class="form-group">
+                <label for="text">Enter Text:</label>
+                <textarea class="form-control" id="text" name="text" rows="4" cols="50"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="num_paraphrases">Select Number of Paraphrases:</label>
+                <select class="form-control" id="num_paraphrases" name="num_paraphrases">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="12">12</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-danger" style="width:100%;">Paraphrase</button>
+        </form>
+
+        {% if paraphrases %}
+        <hr>
+        <h2>Original Paraphrase:</h2>
+        <p>{{ input_text }}</p>
+
+        <hr>
+        <h2>Generated Paraphrases:</h2>
+        <ul class="list-group">
+            {% for paraphrase in paraphrases %}
+            <li class="list-group-item">{{ paraphrase }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
